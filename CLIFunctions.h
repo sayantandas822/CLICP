@@ -4,9 +4,24 @@
 using namespace std;
 class CLIFunctions{
     private:
+    // These are default path values
     string path_def = "C:\\Users\\Sayantan\\OneDrive\\Documents\\CP\\Template";
     string path_destination = "C:\\Users\\Sayantan\\OneDrive\\Documents\\CP";
     public:
+    void init_path(){
+        ifstream file("configsrc.txt");
+        string path;
+        getline(file, path);
+        if(path.length() > 0){
+            path_def = path;
+        }
+        string path2;
+        ifstream file2("configdest.txt");
+        getline(file2, path2);
+        if(path2.length() > 0){
+            path_destination = path2;
+        }
+    }
     void help(){
         // Implements the help function
         cout << "COPY \t";
@@ -71,20 +86,24 @@ class CLIFunctions{
 
     // sets the directory to the specified directory path
     void set_dir(){
-        cout << "Enter the directory path:" << endl;
+        cout << "Enter the destination directory path:" << endl;
         string s;
         cin >> s;
-        path_def = s;
+        ofstream out("configdest.txt");
+        out << s;
+        init_path();
     }
 
     void set_template_path(){
         cout << "Enter Template path: " << endl;
         string s;
         cin >> s;
-        path_destination = s;
+        ofstream out("configsrc.txt");
+        out << s;
+        init_path();
     }
 
-    void show_template_path(){
+    void show_destination_path(){
         cout << path_destination << endl;
     }
 };

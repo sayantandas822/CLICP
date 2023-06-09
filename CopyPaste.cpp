@@ -18,6 +18,7 @@ using namespace std;
 int main(int argc, char* argv[]){
     string s;
     CLIFunctions C;
+    C.init_path();
     if(argc > 1){
         s = argv[1];
     }
@@ -69,12 +70,12 @@ int main(int argc, char* argv[]){
                 C.show_source_path();
             }
         }
-        else if(s == "show_template_path"){
+        else if(s == "show_destination_path"){
             if(argc != 2){
                 C.Invalid();
             }
             else{
-                C.show_template_path();
+                C.show_destination_path();
             }
         }
         // else if here for more commands
